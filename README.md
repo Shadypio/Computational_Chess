@@ -1,3 +1,3 @@
-# Computational_Chess
+# Computational Chess
 
-Lavoro di tesi - Università degli studi di Salerno
+Lavoro di tesi per la Laurea Triennale in Informatica presso l'Università degli studi di Salerno.
