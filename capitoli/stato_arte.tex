@@ -1,17 +1,24 @@
 \chapter{Algoritmi noti e motori scacchistici} %\label{1cap:spinta_laterale}
 % [titolo ridotto se non ci dovesse stare] {titolo completo}
 %
-
-Prima di addentrarci nella varietà degli approcci adottati per affrontate il problema della complessità degli scacchi, 
-è opportuno fare un passo indietro per capire meglio di \textit{che cosa} stiamo parlando.
+\begin{citazione}
+    Questo capitolo illustra lo stato dell'arte e i lavori presenti in letteratura sugli aspetti di ricerca trattati nel nostro studio. 
+    Prima di dare un'occhiata alla varietà degli approcci adottati per affrontate il problema della complessità degli scacchi, 
+    è opportuno fare un passo indietro per capire meglio di \textit{che cosa} si parla.
+\end{citazione}
 
 \section{Teoria dei giochi}
 La \textbf{teoria dei giochi} è una disciplina che studia gli ambienti di interazione strategica tra
-agenti\footnote{Viene definito agente un sistema in grado di percepire il suo ambiente e di agire su di esso.} razionali
-(intelligenti - nel nostro caso) .
-\begin{citazione}
-Questo capitolo illustra lo stato dell'arte e i lavori presenti in letteratura sugli aspetti di ricerca trattati nel nostro studio. 
+agenti intelligenti\footnote{Viene definito agente un sistema in grado di percepire il suo ambiente e di agire su di esso. La peculiarità
+di un agente intelligente è da ricercare nei risultati delle sue azioni che, a un osservatore comune, sembrerebbero essere prerogativa
+dell'intelligenza di un essere umano.}. Per approcciare un problema di questo tipo, l'agente è necessariamente tenuto a trovare
+una strategia che tenga in considerazione le possibili azioni dell'avversario. In questo contesto, una strategia specifica si considera
+\textbf{ottima} se porta ad un risultato almeno pari a quello di qualsiasi altra strategia; il problema da risolvere è dunque 
+quello di capire \textit{come} poter trovare una strategia ottima.
 
-\end{citazione}
+\subsection{Gli scacchi nella teoria dei giochi}
+Gli scacchi vengono classificati come gioco a \textbf{somma zero}\footnote{Il risultato finale di un partecipante
+è bilanciato dal risultato di un altro partecipante di valore uguale ma di segno opposto.} e con \textbf{informazione imperfetta}\footnote{Gli stati
+del gioco non sono sempre espliciti agli agenti.}.
 
 \newpage
