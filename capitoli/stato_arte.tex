@@ -14,11 +14,41 @@ di un agente intelligente è da ricercare nei risultati delle sue azioni che, a 
 dell'intelligenza di un essere umano.}. Per approcciare un problema di questo tipo, l'agente è necessariamente tenuto a trovare
 una strategia che tenga in considerazione le possibili azioni dell'avversario. In questo contesto, una strategia specifica si considera
 \textbf{ottima} se porta ad un risultato almeno pari a quello di qualsiasi altra strategia; il problema da risolvere è dunque 
-quello di capire \textit{come} poter trovare una strategia ottima.
+quello di capire \textit{come} poter trovare una strategia ottima. Inseriti in questo contesto,
+gli scacchi vengono classificati come gioco a \textbf{somma zero} (il risultato finale di un partecipante
+è bilanciato dal risultato di un altro partecipante di valore uguale ma di segno opposto) e con \textbf{informazione imperfetta} (gli stati
+del gioco non sono sempre espliciti agli agenti).
 
-\subsection{Gli scacchi nella teoria dei giochi}
-Gli scacchi vengono classificati come gioco a \textbf{somma zero}\footnote{Il risultato finale di un partecipante
-è bilanciato dal risultato di un altro partecipante di valore uguale ma di segno opposto.} e con \textbf{informazione imperfetta}\footnote{Gli stati
-del gioco non sono sempre espliciti agli agenti.}.
+\section{Scacchi e Intelligenza Artificiale}
+Come accennato nel capitolo precedente, la complessità degli scacchi è ciò che li rende uno degli oggetti di studio più interessanti 
+dell'Intelligenza Artificiale. Alan Turing fu uno dei primi a interessarsi in maniera concreta al problema, progettando 
+\textit{Turochamp}\footnote{Ideato nel 1948, \textit{Turochamp} nacque ben prima di un calcolatore che fosse in grado di 
+leggere ed eseguire il programma. Ciò portò lo stesso Turing a valutare la "bontà" dell'algoritmo, analizzando le mosse con carta e penna.}.
+La debolezza del programma fu però evidenziata da Garri Kasparov in una conferenza del 2012, mostrando che l'algoritmo era 
+in grao di valutare un numero molto limitato di varianti. Il contributo di \textit{Turochamp}, in ogni caso, gettò delle importanti basi 
+per l'evoluzione delle moderne tecniche di ricerca \textit{minimax}\footnote{La ricerca di quiescenza è un algoritmo tipicamente utilizzato per estendere la ricerca a nodi instabili
+in alberi da gioco. L'idea è quella di "emulare" delle posizioni a una profondità maggiore di quella che si sta considerando, per assicurarsi
+che non vi siano trappole nascoste e per ottenere una stima migliore del valore della posizione.}. 
+% Citare con Turochamp
+\subsection{Deep Blue}
+Fu solo nel 1996 che si cominciarono a temere le enormi potenzialità dei computer in ambito scacchistico: in quell'anno fu disputata 
+una partita in condizioni normali di torneo tra Kasparov (allora campione del mondo), e \textit{Deep Blue}, un computer progettato 
+da IBM appositamente per giocare a scacchi, con abbandono da parte del campione dopo 40 mosse. Nel 1997, in occasione della rivincita, 
+Kasparov abbandonò dopo sole 19 mosse\footnote{Alcune mosse di Deep Blue risultavano a Kasparov piuttosto creative e incomprensibili,
+al punto da sospettare che la macchina avesse avuto un supporto umano nel corso della partita. Effettivamente il codice del programma 
+fu modificato tra una sfida e l'altra, permettendo alla macchina di non cadere nelle trappole del campione nelle mosse finali del gioco}. 
+Questi eventi aprirono le basi ai moderni motori scacchistici, che nel corso degli anni hanno dimostrato di saper tener testa anche 
+ai migliori giocatori di scacchi.
+% Citare Deepblue vs Kasparov
+La potenza computazionale di Deep Blue era dovuta al parallelismo massivo: furono utilizzati ben 480 processori (progettati per il gioco degli 
+scacchi), che eseguivano un algoritmo scritto in linguaggio C in grado di calcolare 200 milioni di posizioni al secondo. Le funzioni di 
+valutazione erano scritte in forma generale, mentre la lista delle aperture fu fornita dai campioni Illescas, Fedorowicz e De Firmian.
+\subsection{Stockfish}
+\subsection{AlphaZero}
+
+
+
+
+
 
 \newpage
