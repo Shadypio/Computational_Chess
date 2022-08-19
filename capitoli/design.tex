@@ -63,10 +63,36 @@ Nel gioco degli scacchi è fondamentale tenere in considerazione non solo lo sta
 \end{figure}\\
 
 Più preciso e affidabile dell'algoritmo precedentemente considerato, l'algoritmo greedy tende più a mettere in difficoltà l'avversario piuttosto che a vincere la partita, spesso in maniera controproducente. La priorità di questa strategia è infatti quella di catturare i pezzi dell'avversario, anche a costo di mettere a rischio i propri. In ogni caso, è interessante notare come, tenendo in considerazione il valore dei pezzi, quest'algoritmo favorisca la cattura di pezzi "pesanti" piuttosto che di altri. 
-\subsubsection{Algoritmo Minimax/Negamax con Potatura alfa-beta}
+\subsubsection{Algoritmo Minimax}
+La strategia minimax è una soluzione studiata appositamente per i giochi a somma zero, come nel caso degli scacchi. Lo scopo, come suggerisce il nome, è quello di \textbf{minimizzare la massima perdita} possibile, analizzando l'albero delle decisioni e valutando l'utilità di un nodo di trovarsi nello stato corrente (a patto che entrambi i giocatori scelgano mosse ottime fino alla fine della partita). A differenza dei due algoritmi precedentemente analizzati, dunque, salta subito all'occhio la prima peculiarità dell'algoritmo, che tiene in stretta considerazione le mosse dell'avversario e gioca comportandosi di conseguenza. Attraverso l'algoritmo minimax il problema di ricerca della mosse migliore è stato ridotto al problema della visita dell'albero delle decisioni. Analizzando la complessità intrinseca del gioco degli scacchi trattata nei capitoli precedenti si è ritenuto necessario effettuare una leggera modifica all'algoritmo minimax che tenesse in considerazione la profondità con cui scendere nell'albero, portando il problema a livelli più o meno trattabili in termini di complessità temporale (l'analisi nel dettaglio delle prestazioni verrà fornita nel paragrafo successivo).
+\subsubsection{Algoritmo Negamax con Potatura alfa-beta}
+% citare wikipedia
+L'algoritmo Negamax costituisce una variante dell'algoritmo Minimax. La caratteristica principale dell'algoritmo è quella di considerare il valore del giocatore A in un certo gioco come la negazione del valore del giocatore B. Così, il giocatore che deve muovere cercherà una mossa che massimizzi la negazione del valore della posizione risultante dalla mossa: così facendo, basta un singolo calcolo per ricavare il valore di tutte le posizioni. Questa è chiaramente una semplificazione rispetto al Minimax. Un'ulteriore miglioria all'algoritmo è stata apportata considerando la \textbf{Potatura alfa-beta}. L'idea è in realtà applicabile a un qualsiasi albero, e consente di ridurre significativamente la complessità di tempo necessaria all'esplorazione. Consideriamo un qualsiasi nodo \textit{n} raggiungibile. Se esiste un'alternativa \textit{m} migliore, allora \textit{n} e tutti i suoi discendenti non saranno mai esplorati, portando a una vera e propria "potatura" dell'albero. L'efficacia dell'algoritmo, in ogni caso, dipendente dall'ordinamento dei nodi visitati, che dipende da gioco a gioco. Nel caso degli scacchi, sarebbe una buona idea considerare dapprima le mosse che catturano i pezzi avversari, poi le mosse che le minacciano e infine le altre. 
 
 \subsection{Analisi delle prestazioni}
+Passiamo adesso all'analisi delle prestazioni
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Profondità} & \textbf{Prima Mossa} & \textbf{Seconda Mossa} & \textbf{Terza Mossa}\\
+\hline
+\textbf{1} & 0,15 & 0,19 & 0,35\\
+\hline
+\textbf{2} & 0,86 & 1,32 & 2,85\\
+\hline
+\textbf{3} & 11,74 & 17,77 & 59,81\\
+\hline
+\end{tabular}
+    \caption{Tempo di visita dell'albero (in secondi) al variare della profondità}
+    \label{tab:my_label}
+\end{table}
+
 \subsubsection{Threading}
+Prova Threading
+\subsection{Migliorie della funzione di valutazione}
+Prova paragrafo
 \section{Secondo Modulo}
     
 \newpage
