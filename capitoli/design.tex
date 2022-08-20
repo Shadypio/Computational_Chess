@@ -58,7 +58,7 @@ Nel gioco degli scacchi è fondamentale tenere in considerazione non solo lo sta
 \begin{figure}[!htb]
     \includegraphics[width=10cm]{frontmatter/figure/valore_pezzi.pdf}
     \centering
-    \caption{Oltre ai valori assegnati a ciascun pezzo si tengono in considerazione anche le situazioni di scacco matto e stallo}
+    \caption{Valore dei pezzi, scacco matto e stallo}
     \label{fig:valore_pezzi}
 \end{figure}\\
 
@@ -70,9 +70,28 @@ La strategia minimax è una soluzione studiata appositamente per i giochi a somm
 L'algoritmo Negamax costituisce una variante dell'algoritmo Minimax. La caratteristica principale dell'algoritmo è quella di considerare il valore del giocatore A in un certo gioco come la negazione del valore del giocatore B. Così, il giocatore che deve muovere cercherà una mossa che massimizzi la negazione del valore della posizione risultante dalla mossa: così facendo, basta un singolo calcolo per ricavare il valore di tutte le posizioni. Questa è chiaramente una semplificazione rispetto al Minimax. Un'ulteriore miglioria all'algoritmo è stata apportata considerando la \textbf{Potatura alfa-beta}. L'idea è in realtà applicabile a un qualsiasi albero, e consente di ridurre significativamente la complessità di tempo necessaria all'esplorazione. Consideriamo un qualsiasi nodo \textit{n} raggiungibile. Se esiste un'alternativa \textit{m} migliore, allora \textit{n} e tutti i suoi discendenti non saranno mai esplorati, portando a una vera e propria "potatura" dell'albero. L'efficacia dell'algoritmo, in ogni caso, dipendente dall'ordinamento dei nodi visitati, che dipende da gioco a gioco. Nel caso degli scacchi, sarebbe una buona idea considerare dapprima le mosse che catturano i pezzi avversari, poi le mosse che le minacciano e infine le altre. 
 
 \subsection{Analisi delle prestazioni}
-Passiamo adesso all'analisi delle prestazioni
+Un'analisi delle prestazioni degli algoritmi sopra citati non è stata fornita per tutti. Le forti limitazioni di alcune delle strategie adottate per risolvere il problema della ricerca di una mossa non hanno favorito un'interesse significativo: la "casualità" a cui si affida l'algoritmo naive e la bassa considerazione delle mosse dell'avversario dell'algoritmo Greedy non consentirebbero un'indagine appropriata. Al contrario, data la natura della strategia Minimax che si serve di un vero e proprio albero di ricerca in cui ciascun nodo rappresenta una mossa legale, si è ritenuto opportuno procedere all'analisi prestazionale del suddetto algoritmo. Per sua natura, l'algoritmo Minimax non è efficiente in termini di complessità temporale: essendo essa governata dalla dimensione \textit{m} dell'albero, nel caso peggiore la ricerca avrà complessità $O(b^m)$.
 
-\begin{table}[]
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Profondità} & \textbf{Prima Mossa} & \textbf{Seconda Mossa} & \textbf{Terza Mossa}\\
+\hline
+\textbf{1} & 0,26 & 0,56 & 0,94\\
+\hline
+\textbf{2} & 1,39 & 3,02 & 4,02\\
+\hline
+\textbf{3} & 41,74 & 82,96 & 192,34\\
+\hline
+\end{tabular}
+    \caption{Tempo di visita dell'albero (in secondi) al variare della profondità (senza Potatura)}
+    \label{tab:my_label}
+\end{table}
+
+Tempi del genere rendono il problema intrattabile. Si notano sin da subito, a una profondità non eccessivamente elevata, i tempi d'attesa per la ricerca dopo appena la terza mossa, che in una partita di circa venti o trenta mosse sarebbero notevolmente elevati. Per ovviare al problema è stata aggiunta la tecnica della \textbf{potatura}, che consente di evitare di visitare tutti i nodi dell'albero, alla variante Negamax. I risultati delle prestazioni dell'algoritmo Negamax con Potatura alfa-beta sono forniti di seguito.
+
+\begin{table}[!htb]
     \centering
     \begin{tabular}{|c|c|c|c|}
 \hline
@@ -85,14 +104,34 @@ Passiamo adesso all'analisi delle prestazioni
 \textbf{3} & 11,74 & 17,77 & 59,81\\
 \hline
 \end{tabular}
-    \caption{Tempo di visita dell'albero (in secondi) al variare della profondità}
+    \caption{Tempo di visita dell'albero (in secondi) al variare della profondità (con Potatura)}
     \label{tab:my_label}
 \end{table}
 
-\subsubsection{Threading}
-Prova Threading
+La complessità esponenziale dell'algoritmo permane, ma si può notare dai dati un andamento sostanzialmente "meno esponenziale" dell'algoritmo precedentemente adottato.
+
 \subsection{Migliorie della funzione di valutazione}
-Prova paragrafo
+Sebbene i risultati ottenuti lascino intendere il raggiungimento di risultati più o meno soddisfacenti, sono stati effettuati degli esperimenti sul funzionamento delle tecniche di Intelligenza Artificiale apportando modifiche al metodo di valutazione della posizione sulla scacchiera. Come indicato nel paragrafo dedicato all'algoritmo Greedy era stato originariamente considerato un dizionario che tenesse traccia dei valori dei pezzi in base alla sua importanza, ottenendo un valore più alto per un pezzo come la Regina piuttosto che per un pedone. Questo paragrafo è invece dedicato alla descrizione di una nuova funzione di valutazione, che tiene traccia non solo del valore di un pezzo, ma anche della bontà della sua posizione sulla scacchiera.
+
+\begin{figure}[!htb]
+    \includegraphics[width=10cm]{frontmatter/figure/cavallo.pdf}
+    \centering
+    \caption{Utilità delle caselle per il cavallo}
+    \label{fig:valore_pezzi}
+\end{figure}
+
+\begin{figure}[!htb]
+    \includegraphics[width=10cm]{frontmatter/figure/pedone.pdf}
+    \centering
+    \caption{Utilità delle caselle per il pedone bianco}
+    \label{fig:valore_pezzi}
+\end{figure}
+Come suggerisce la \textbf{fig. 3.5} l'utilità del cavallo di trovarsi in una certa casella è stata valutata con un intero da 1 a 4 in base alla "minaccia" che è possibile portare avanti con quel pezzo. Tenendo a mente i suoi movimenti a L del cavallo, un cavallo mantenuto verso il centro della scacchiera è chiaramente più forte di un cavallo mantenuto verso i bordi, essendo quest'ultimo più limitato nei movimenti. Analogamente, le posizioni considerate per il pedone bianco nella \textbf{fig. 3.6} suggeriscono un'idea simile: per un pedone è importante non solo controllare le caselle in diagonale, ma anche cercare di arrivare al lato opposto della scacchiera (al quale è assegnato il valore più alto) per arrivare a promozione. 
+
+\subsubsection{Cambiamenti nelle prestazioni}
+Sebbene sia stata apportata una modifica alla variazione della funzione di valutazione, la complessità dell'algoritmo di ricerca non è variata in modo significativo. Il motivo è da ricercare, come già spiegato nel paragrafo dedicato, alla natura intrinseca dell'algoritmo. Le costanti migliorie apportate alla funzione di valutazione non sarebbero abbastanza per ridurre i tempi di visita dell'albero delle decisioni. Una riduzione notevole dei tempi di esecuzione era stata già ottenuta attraverso la tecnica della Potatura alfa-beta.
+
 \section{Secondo Modulo}
-    
+La modifica della funzione di valutazione del modulo ha spinto alla ricerca di una metodologia completamente nuova...%continua
+
 \newpage
