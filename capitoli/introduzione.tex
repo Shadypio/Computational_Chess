@@ -1,14 +1,15 @@
 \phantomsection
 %\addcontentsline{toc}{chapter}{Introduzione}
 \chapter{Introduzione}
+\label{cap: introduzione}
 \section{Contesto applicativo}
+\label{cap: contesto_applicativo}
 Lo studio proposto è incentrato sul gioco degli scacchi. Nello specifico vengono passate a rassegna diverse tecniche di 
 Intelligenza Artificiale volte a ricercare (e compiere) una mossa valida sulla scacchiera nel corso di una partita regolare.
-Vengono resi noti i due differenti approcci adottati per il conseguimento degli obiettivi sopracitati: 
+Vengono resi noti i due differenti approcci adottati per il conseguimento degli obiettivi fissati: 
 \begin{itemize}
-    \item \textbf{Primo approccio}: viene fornita un'implementazione da zero della scacchiera, sulla quale degli algoritmi di ricerca valutano lo stato corrente ed effettuano la "migliore"
-    mossa legale tra quelle disponibili;
-    \item \textbf{Secondo approccio}: viene analizzata una rete neurale addestrata che gioca simulando le mosse di un giocatore umano. 
+    \item \textbf{Primo approccio}: viene progettata e programmata un'implementazione da zero della scacchiera, sulla quale degli algoritmi di ricerca valutano lo stato corrente ed effettuano la migliore mossa legale tra quelle disponibili;
+    \item \textbf{Secondo approccio}: viene costruita e addestrata una rete neurale che gioca simulando le mosse di un giocatore umano. 
 \end{itemize}
 \markboth{Introduzione}{}
 % [titolo ridotto se non ci dovesse stare] {titolo completo}
@@ -19,7 +20,7 @@ giocatori è stata tale da favorire lo sviluppo di diverse Federazioni (tra le q
 \textbf{Fédération Internationale des Échecs - FIDE}) con conseguenti tornei e competizioni in tutto il mondo. 
 Le motivazioni della stesura del presente elaborato sono da ricercare nella natura intrinseca del gioco stesso. 
 Claude Shannon, ingegnere e matematico statunitense, nel suo \textit{"Programming a Computer for Playing Chess"} fornì una stima di $10^{120}$
-partite possibili, dimostrando impraticabile l'idea di affrontare il problema con la forza bruta\footnote{Victor Allis, informatico olandese, 
+partite possibili, dimostrando impraticabile l'idea di affrontare il problema della complessità degli scacchi con la forza bruta\footnote{Victor Allis, informatico olandese, 
 anni dopo stimò la complessità essere di almeno $10^{123}$, "basata su una media del fattore di ramificazione di 35 e una 
 durata media di gioco di 80 coppie di mosse".}. Di fronte a tali numeri, non si può non rimanere disorientati e affascinati allo
 stesso tempo, tenendo anche in considerazione che il numero di atomi nell'universo è stimato intorno a $10^{80}$. 
@@ -30,13 +31,13 @@ seguenti, non senza un'attenta critica e analisi accurata sui risultati raggiunt
 
 \section{Risultati}
 %da revisionare
-Gli algoritmi di ricerca e di apprendimento sfruttati nei due diversi moduli offrono un quadro completo sulle moderne tecniche di intelligenza
-artificiale che non solo vengono applicate su diverse piattaforme ma sono tutt'oggi in continua evoluzione. 
+Gli algoritmi di ricerca e di apprendimento sfruttati nei due diversi moduli offrono un quadro completo sulle moderne tecniche di Intelligenza
+Artificiale che non solo vengono applicate su diverse piattaforme disponibili online ma sono tutt'oggi in continua evoluzione. 
 I risultati ottenuti non vogliono aprire nuovi orizzonti a differenti approcci sullo studio, 
-ma fanno più da panoramica generale a tecniche già esistenti. Come anticipato nel primo paragrafo, tali risultati sono stati ottenuti attraverso due diversi moduli di cui si fornisce una breve sintesi, ma che verranno trattati nello specifico nel capitolo 3:
+ma fanno più da panoramica generale a tecniche già esistenti. Come anticipato nel paragrafo \ref{cap: contesto_applicativo}, tali risultati sono stati ottenuti attraverso due diversi moduli di cui si fornisce una breve sintesi, ma che verranno trattati nello specifico nel capitolo \ref{cap: design}:
 \begin{itemize}
     \item \textbf{Modulo 1}: i classici approcci adottati per la rappresentazione della scacchiera e dei pezzi in gioco (ognuno con le rispettive mosse legali) vengono progettati e riprogrammati da zero per cercare di comprendere meglio la natura degli studi evoluti nel corso del tempo. Attraverso un algoritmo di Intelligenza Artificiale si accede a una lista di mosse possibili (considerando lo stato corrente della scacchiera) e viene giocata la mossa migliore secondo una precisa funzione obiettivo.
-    \item \textbf{Modulo 2}: sfruttando un'implementazione ben nota, è stato costruito un modello di Machine Learning e addestrato seguendo un approccio ben preciso. Questo modello è stato poi confrontato con diversi modelli già esistenti al fine di ricavarne una valutazione che ne indichi le prestazioni. 
+    \item \textbf{Modulo 2 - Caissa}: è stato costruito Caissa, un modello di Machine Learning addestrato seguendo un approccio ben preciso. Questo modello è stato poi confrontato con diversi modelli già esistenti al fine di ricavarne una valutazione che ne indichi le prestazioni. 
 \end{itemize}
 \newpage
 \section{Struttura della tesi}
