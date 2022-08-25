@@ -20,13 +20,13 @@ gli scacchi vengono classificati come gioco a \textbf{somma zero} (il risultato 
 del gioco sono sempre espliciti agli agenti).
 
 \section{Scacchi e Intelligenza Artificiale}
-Come accennato nel capitolo precedente, la complessità degli scacchi è ciò che li rende uno degli oggetti di studio più interessanti 
+Come accennato nel capitolo \ref{cap: introduzione}, la complessità degli scacchi è ciò che li rende uno degli oggetti di studio più interessanti 
 dell'Intelligenza Artificiale. Alan Turing, uno dei padri dell'informatica, fu uno dei primi a interessarsi in maniera concreta al problema, progettando 
 \textit{Turochamp}\footnote{Ideato nel 1948, \textit{Turochamp} nacque ben prima di un calcolatore che fosse in grado di 
-leggere ed eseguire il programma. Ciò portò lo stesso Turing a valutare la "bontà" dell'algoritmo, analizzando le mosse con carta e penna.}.
-La debolezza del programma fu però evidenziata da Garri Kasparov in una conferenza del 2012, mostrando che l'algoritmo era 
+leggere ed eseguire il programma. Ciò portò lo stesso Turing a valutare la "bontà" dell'algoritmo, analizzando le mosse con carta e penna.}, uno dei primi algoritmi per giocare a scacchi.
+La sua debolezza fu però evidenziata da Garri Kasparov in una conferenza del 2012, mostrando che l'algoritmo era 
 in grado di valutare un numero molto limitato di varianti. Il contributo di \textit{Turochamp}, in ogni caso, gettò delle importanti basi 
-per l'evoluzione delle moderne tecniche di ricerca \textit{minimax}\footnote{La ricerca di quiescenza è un algoritmo tipicamente utilizzato per estendere la ricerca a nodi instabili
+per l'evoluzione delle moderne tecniche di ricerca minimax\footnote{La ricerca di quiescenza è un algoritmo tipicamente utilizzato per estendere la ricerca a nodi instabili
 in alberi da gioco. L'idea è quella di "emulare" delle posizioni a una profondità maggiore di quella che si sta considerando, per assicurarsi
 che non vi siano trappole nascoste e per ottenere una stima migliore del valore della posizione.}. 
 % Citare con Turochamp
@@ -34,23 +34,23 @@ che non vi siano trappole nascoste e per ottenere una stima migliore del valore 
 Fu solo nel 1996 che si cominciarono a temere le enormi potenzialità dei computer in ambito scacchistico: in quell'anno fu disputata 
 una partita in condizioni normali di torneo tra Kasparov (allora campione del mondo) e \textit{Deep Blue}, un computer progettato 
 da IBM appositamente per giocare a scacchi. La partita si concluse con l'abbandono da parte del campione dopo 40 mosse. Nel 1997, in occasione della rivincita, 
-Kasparov abbandonò dopo sole 19 mosse\footnote{Alcune mosse di Deep Blue risultarono a Kasparov piuttosto creative e incomprensibili,
+Kasparov abbandonò dopo sole 19 mosse\footnote{Alcune mosse di \textit{Deep Blue} risultarono a Kasparov piuttosto creative e incomprensibili,
 al punto da sospettare che la macchina stesse ricevendo un supporto umano nel corso della partita. Effettivamente il codice del programma 
 fu modificato tra una sfida e l'altra, permettendo alla macchina di non cadere nelle trappole del campione nelle mosse finali della partita.}. 
 Questi eventi aprirono le basi ai moderni motori scacchistici, che nel corso degli anni hanno dimostrato di saper tener testa anche 
 ai migliori giocatori di scacchi.
 % Citare Deepblue vs Kasparov
-La potenza computazionale di Deep Blue era dovuta al parallelismo massivo: furono utilizzati ben 480 processori (progettati per il gioco degli 
+La potenza computazionale di \textit{Deep Blue} era dovuta al \textbf{parallelismo massivo}: furono utilizzati ben 480 processori (progettati per il gioco degli 
 scacchi), che eseguivano un algoritmo scritto in linguaggio C in grado di calcolare 200 milioni di posizioni al secondo. Le funzioni di 
 valutazione erano scritte in forma generale, mentre la lista delle aperture fu fornita dai campioni Illescas, Fedorowicz e De Firmian.
 
 \subsection{Stockfish}
-Stockfish è un motore scacchistico open-source considerato uno dei più forti in assoluto. Correntemente il motore implementa una rete neurale con \textit{Deep Learning}\footnote{Le reti neurali artificiali sono organizzate in diversi strati, ognuno dei quali calcola i valori per lo strato successivo fino ad ottenere informazioni sempre più complete. Ciò consentirebbe la risoluzione di problemi di apprendimento senza la necessità di un \textit{pre-processing} dei dati.}. 
+\textit{Stockfish} è un motore scacchistico open-source considerato uno dei più forti in assoluto. Correntemente il motore implementa una rete neurale con \textit{Deep Learning}\footnote{Le reti neurali artificiali sono organizzate in diversi strati, ognuno dei quali calcola i valori per lo strato successivo fino ad ottenere informazioni sempre più complete. Ciò consentirebbe la risoluzione di problemi di apprendimento senza la necessità di un \textit{pre-processing} dei dati.}. 
 %Citare deep learning
 La scacchiera viene rappresentata tramite \textbf{bitboard} (una struttura dati in grado di immagazzinare lo stato di ogni casella della scacchiera all’interno di una parola di 64 bit) e la computazione viene supportata da 512 thread. L'algoritmo di ricerca ad albero è implementato con \textbf{potatura alfa-beta}; in tal modo il numero di nodi da ricercare viene drasticamente ridotto sulla base della funzione di valutazione (la valutazione di una mossa termina non appena viene dimostrato che è peggiore di una mossa già valutata in precedenza). Inoltre, mosse come catture vincenti sono valutate prima di altre mosse, riducendo ulteriormente la profondità dell'albero da visitare e garantendo una maggior efficienza dell'algoritmo di ricerca.
 
 \subsection{AlphaZero}
-L'evoluzione continua delle tecniche di \textbf{Machine Learning} portò il team di Google DeepMind alla realizzazione di un algoritmo basato su tecniche di apprendimento automatico. AlphaZero è infatti guidato da una rete neurale convoluzionale addestrata per rinforzo. In questo modo la qualità di una mossa è valutata da un valore numerico di "ricompensa", incoraggiando il motore ad effettuare scelte simili in futuro (viceversa, un valore numerico di "punizione" allontana il motore a considerare determinate mosse). AlphaZero fu addestrato per 9 ore su una singola macchina munita di 4 TPU\footnote{Una \textbf{T}ensor \textbf{P}rocessing \textbf{U}nit è un microprocessore per applicazioni specifiche nel campo delle reti neurali.} giocando contro Stockfish 8. Effettivamente la natura dell'algoritmo consentì ad AlphaZero di giocare senza libro di apertura e chiusura, arrivando a scoprire e giocare autonomamente diverse aperture che a Stockfish vennero invece fornite manualmente.
+L'evoluzione continua delle tecniche di \textbf{Machine Learning} portò il team di Google DeepMind alla realizzazione di un algoritmo basato su tecniche di apprendimento automatico. \textit{AlphaZero} è infatti guidato da una rete neurale convoluzionale addestrata per rinforzo. In questo modo la qualità di una mossa è valutata da un valore numerico di "ricompensa", incoraggiando il motore ad effettuare scelte simili in futuro (viceversa, un valore numerico di "punizione" allontana il motore a considerare determinate mosse). \textit{AlphaZero} fu addestrato per 9 ore su una singola macchina munita di 4 TPU\footnote{Una \textbf{T}ensor \textbf{P}rocessing \textbf{U}nit è un microprocessore per applicazioni specifiche nel campo delle reti neurali.} giocando contro \textit{Stockfish 8}. Effettivamente la natura dell'algoritmo consentì ad \textit{AlphaZero} di giocare senza libro di apertura e chiusura, arrivando a scoprire e giocare autonomamente diverse aperture che a \textit{Stockfish} vennero invece fornite manualmente.
 %Citare AlphaZero
 
 
