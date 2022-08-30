@@ -1,25 +1,31 @@
-\chapter{Storia ed evoluzione dei motori scacchistici} %\label{1cap:spinta_laterale}
+\chapter{Ruolo del gioco degli scacchi nell'Intelligenza Artificiale} %\label{1cap:spinta_laterale}
 % [titolo ridotto se non ci dovesse stare] {titolo completo}
 %
 \begin{citazione}
     Questo capitolo illustra lo stato dell'arte e i lavori presenti in letteratura sugli aspetti di ricerca trattati nel nostro studio. 
-    Prima di dare un'occhiata alla varietà degli approcci adottati per affrontare il problema della complessità degli scacchi, 
-    è opportuno fare un passo indietro per capire meglio di \textit{che cosa} si parla.
+    Prima di dare un'occhiata alla varietà degli approcci adottati per affrontare il problema della complessità degli scacchi, è opportuno fare un passo indietro per capire meglio di \textit{che cosa} si parla.
 \end{citazione}
-
 \section{Teoria dei giochi}
-La \textbf{teoria dei giochi} è una disciplina che studia gli ambienti di interazione strategica tra
-agenti intelligenti\footnote{Viene definito agente un sistema in grado di percepire il suo ambiente e di agire su di esso. La peculiarità
-di un agente intelligente è da ricercare nei risultati delle sue azioni che, a un osservatore comune, sembrerebbero essere prerogativa
-dell'intelligenza di un essere umano.}. Per approcciare un problema di questo tipo, l'agente è necessariamente tenuto a trovare
-una strategia che tenga in considerazione le possibili azioni dell'avversario. In questo contesto, una strategia specifica si considera
-\textbf{ottima} se porta ad un risultato almeno pari a quello di qualsiasi altra strategia; il problema da risolvere è dunque 
-quello di capire \textit{come} poter trovare una strategia ottima. Inseriti in questo contesto,
-gli scacchi vengono classificati come gioco a \textbf{somma zero} (il risultato finale di un partecipante
-è bilanciato dal risultato di un altro partecipante di valore uguale ma di segno opposto) e con \textbf{informazione perfetta} (gli stati
-del gioco sono sempre espliciti agli agenti).
-%citare
-
+La \textbf{teoria dei giochi}\cite{colombo2003introduzione} è una branca della matematica che studia l'interazione strategica tra gli individui nell'ambito di un \textbf{gioco}. In questo senso viene considerato gioco uno scenario in cui i contendenti (giocatori) seguono un determinato tipo di comportamento (strategia) al fine di massimizzare la propria vincita. Nel complesso l'esito finale del gioco coincide con il risultato della sequenza delle strategie adottate dai giocatori e dai loro avversari. Chiarito lo scopo e il significato dei giochi, questi vengono divisi in 5 gruppi principali:
+\begin{itemize}
+    \item \textbf{giochi cooperativi e non cooperativi}: nei giochi cooperativi i giocatori possono formare alleanze per massimizzare le probabilità di vincita. Ciò non è possibile nei giochi non cooperativi;
+    \item \textbf{giochi simmetrici e asimmetrici}: nei giochi simmetrici tutti i partecipanti hanno gli stessi obiettivi, ed è fondamentale elaborare strategie vincenti. Nei giochi asimmetrici, invece, i giocatori hanno obiettivi diversi;
+    \item \textbf{giochi ad informazione perfetta e ad informazione imperfetta}: nei giochi ad informazione perfetta tutti i giocatori possono vedere le mosse degli altri giocatori. Le mosse sono invece nascose nei giochi ad informazione imperfetta;
+    \item \textbf{giochi simultanei e sequenziali}: nei giochi simultanei i giocatori possono giocare le proprie mosse simultaneamente, piuttosto che a turni come avviene nei giochi sequenziali;
+    \item \textbf{giochi a somma zero e a somma non zero}: nei giochi a somma zero la vincita di un giocatore è equilibrata dalla perdita di un altro. Nei giochi a somma non zero, invece, più giocatori possono trarre vantaggio dalle vincite di un altro.
+\end{itemize}
+Il gioco degli scacchi è pertanto considerato un gioco non cooperativo e simmetrico, poiché le partite sono solitamente disputate tra due singoli avversari che puntano entrambi a vincere la partita. Ciascun giocatore è tenuto a muovere i propri pezzi a turno davanti agli occhi dell'avversario, e alla fine della partita la vincita di un giocatore comporta la perdita dell'altro: queste caratteristiche rendono gli scacchi un gioco ad informazione perfetta, sequenziale e a somma zero. 
+\subsection{Teoria dei giochi e Intelligenza Artificiale}
+I giochi ritenuti più interessanti nell'ambito dell'Intelligenza Artificiale sono quelli \textbf{a somma zero} con \textbf{informazione perfetta}, solitamente a turni e a due giocatori. Le azioni degli agenti sono pertanto sequenziali, e le loro funzioni di utilità alla fine della partita sono uguali ma di segno opposto (vittoria +1, sconfitta -1). I primi approcci dell'Intelligenza Artificiale allo studio dei giochi si ebbero già nel 1950 proprio con gli scacchi. Da quel punto in poi le macchine hanno pian piano superato le capacità degli esseri umani anche nella dama in molti altri giochi. L'interesse verso i giochi è dovuto alla \textbf{facilità} nella loro rappresentazione contrapposta alla \textbf{difficoltà} nel risolverli\cite{russell2005intelligenza}. Un gioco può infatti essere definito come un \textbf{problema di ricerca} avente le seguenti caratteristiche:
+\begin{itemize}
+    \item lo \textbf{stato iniziale}, che specifica la configurazione di partenza del gioco stesso;
+    \item il \textbf{giocatore} a cui tocca fare una mossa in un dato stato;
+    \item l'\textbf{insieme delle mosse} lecite in un determinato stato;
+    \item il \textbf{modello di transizione} cioè il risultato di una mossa;
+    \item il \textbf{test di terminazione} che controlla se la partita è finita oppure no;
+    \item la \textbf{funzione obiettivo} che definisce il valore numerico finale per un gioco che termina in un particolare state per un particolare giocatore.
+\end{itemize}
+L'\textbf{obiettivo} principale nello studio di questi problemi è dunque la ricerca di una strategia da adottare considerando le mosse dell'avversario; più in particolare si ricerca una strategia \textbf{ottima} che porti ad un risultato almeno pari a quello di qualsiasi altra strategia, assumendo che si stia giocando contro un giocatore infallibile. Tale ricerca si traduce nella visita dell'\textbf{albero di gioco}, ossia un albero in cui i nodi sono stati del gioco e gli archi le mosse. La visita dell'albero delle mosse del gioco degli scacchi è rimandata al Capitolo \ref{cap: design}. Prima di parlare delle soluzioni proposte al problema degli scacchi è opportuno comprendere a fondo le regole che vengono tutt'oggi osservate nelle partite.
 \section{Come si gioca a scacchi}
 \subsection{Preparazione della scacchiera}
 Le regole ufficiali del gioco degli scacchi\cite{lawsofchess} prevedono che la scacchiera sia inizialmente disposta in modo che ogni giocatore abbia una casella chiara nell'angolo inferiore destro. Ai due angoli opposti sono collocate le due torri, seguite dai due cavalli e dai due alfieri. La regina occupa sempre la casella del proprio colore, e il re è collocato accanto alla regina. Tutta la seconda traversa è invece occupata dai pedoni.
@@ -49,17 +55,18 @@ L'obiettivo del gioco degli scacchi è quello di attaccare il re avversario, cer
     \item tutti i propri pezzi sono stati catturati, tranne il re. Non è possibile eseguire alcuna mossa legale, ma contemporaneamente il re non è sotto scacco. In questo caso, la partita finisce per \textbf{stallo}:
     \item i giocatori possono semplicemente accordarsi e smettere di giocare;
     \item non è possibile dare scacco matto in alcun modo (per esempio, un re e un alfiere contro un re);
-    \item è possibile dichiarare patta se è stata ripetuta la stessa posizione per la terza volta nel corso della partita;
+    \item è stata ripetuta la stessa posizione per la terza volta nel corso della partita;
     \item sono state giocate 50 mosse consecutive senza catturare alcun pezzo.
 \end{itemize}
-\section{Scacchi e Intelligenza Artificiale}
-Come accennato nel capitolo \ref{cap: introduzione}, la complessità degli scacchi è ciò che li rende uno degli oggetti di studio più interessanti 
-dell'Intelligenza Artificiale. Alan Turing, uno dei padri dell'informatica, fu uno dei primi a interessarsi in maniera concreta al problema, progettando 
+\section{Breve panoramica sui motori scacchistici}
+\subsection{Turochamp}
+Come accennato nel capitolo \ref{cap: introduzione}, la complessità degli scacchi è ciò che li rende una delle sfide più interessanti 
+dell'Intelligenza Artificiale. Alan Turing, uno dei padri dell'informatica, fu tra i primi ad interessarsi in maniera concreta al problema, progettando 
 \textit{Turochamp}\footnote{Ideato nel 1948, \textit{Turochamp} nacque ben prima di un calcolatore che fosse in grado di 
-leggere ed eseguire il programma. Ciò portò lo stesso Turing a valutare la "bontà" dell'algoritmo, analizzando le mosse con carta e penna.}, uno dei primi algoritmi per giocare a scacchi\cite{godena2021eterna}.
+leggere ed eseguire il programma. Ciò portò lo stesso Turing a valutare la "bontà" dell'algoritmo, analizzando le mosse con carta e penna.}, un algoritmo per giocare a scacchi\cite{godena2021eterna}.
 La sua debolezza fu però evidenziata da Garri Kasparov in una conferenza del 2012, che mostrò che l'algoritmo era 
 in grado di valutare un numero molto limitato di varianti\cite{kasparov2017reconstructing}. Il contributo di \textit{Turochamp}, in ogni caso, gettò delle importanti basi 
-per l'evoluzione delle moderne tecniche di ricerca minimax\footnote{La ricerca di quiescenza è un algoritmo tipicamente utilizzato per estendere la ricerca a nodi instabili in alberi da gioco. L'idea è quella di "emulare" delle posizioni a una profondità maggiore di quella che si sta considerando, per assicurarsi che non vi siano trappole nascoste e per ottenere una stima migliore del valore della posizione.}.
+per l'evoluzione delle moderne tecniche di ricerca minimax.
 
 \subsection{Deep Blue}
 Fu solo nel 1996 che si cominciarono a temere le enormi potenzialità dei computer in ambito scacchistico: in quell'anno fu disputata 
@@ -75,7 +82,7 @@ scacchi), che eseguivano un algoritmo scritto in linguaggio C in grado di calcol
 valutazione erano scritte in forma generale, mentre la lista delle aperture fu fornita dai campioni Illescas, Fedorowicz e De Firmian.
 
 \subsection{Stockfish}
-\textit{Stockfish} è un motore scacchistico open-source considerato uno dei più forti in assoluto. Correntemente il motore implementa una rete neurale con \textit{Deep Learning}\footnote{Le reti neurali artificiali sono organizzate in diversi strati, ognuno dei quali calcola i valori per lo strato successivo fino ad ottenere informazioni sempre più complete. Ciò consentirebbe la risoluzione di problemi di apprendimento senza la necessità di un \textit{pre-processing} dei dati.}. La scacchiera viene rappresentata tramite \textbf{bitboard} (una struttura dati in grado di immagazzinare lo stato di ogni casella della scacchiera all’interno di una parola di 64 bit) e la computazione viene supportata da 512 thread. L'algoritmo di ricerca ad albero è implementato con \textbf{potatura alfa-beta}; in tal modo il numero di nodi da ricercare viene drasticamente ridotto sulla base della funzione di valutazione (la valutazione di una mossa termina non appena viene dimostrato che è peggiore di una mossa già valutata in precedenza). Inoltre, mosse come catture vincenti sono valutate prima di altre mosse, riducendo ulteriormente la profondità dell'albero da visitare e garantendo una maggior efficienza dell'algoritmo di ricerca\cite{enwiki:1105171756}.
+\textit{Stockfish} è un motore scacchistico open-source considerato uno dei più forti in assoluto. Correntemente il motore implementa una rete neurale con \textit{Deep Learning}. La scacchiera viene rappresentata tramite \textbf{bitboard} (una struttura dati in grado di immagazzinare lo stato di ogni casella della scacchiera all’interno di una parola di 64 bit) e la computazione viene supportata da 512 thread. L'algoritmo di ricerca ad albero è implementato con \textbf{potatura alfa-beta}; in tal modo il numero di nodi da ricercare viene drasticamente ridotto sulla base della funzione di valutazione (la valutazione di una mossa termina non appena viene dimostrato che è peggiore di una mossa già valutata in precedenza). Inoltre, mosse come catture vincenti sono valutate prima di altre mosse, riducendo ulteriormente la profondità dell'albero da visitare e garantendo una maggior efficienza dell'algoritmo di ricerca\cite{enwiki:1105171756}.
 
 \subsection{AlphaZero}
 L'evoluzione continua delle tecniche di \textbf{Machine Learning} portò il team di Google DeepMind alla realizzazione di un algoritmo basato su tecniche di apprendimento automatico. \textit{AlphaZero} è infatti guidato da una rete neurale convoluzionale addestrata per rinforzo. In questo modo la qualità di una mossa è valutata da un valore numerico di "ricompensa", incoraggiando il motore ad effettuare scelte simili in futuro (viceversa, un valore numerico di "punizione" allontana il motore a considerare determinate mosse). \textit{AlphaZero} fu addestrato per 9 ore su una singola macchina munita di 4 TPU\footnote{Una \textbf{T}ensor \textbf{P}rocessing \textbf{U}nit è un microprocessore per applicazioni specifiche nel campo delle reti neurali.} giocando contro \textit{Stockfish 8}. Effettivamente la natura dell'algoritmo consentì ad \textit{AlphaZero} di giocare senza libro di apertura e chiusura, arrivando a scoprire e giocare autonomamente diverse aperture che a \textit{Stockfish} vennero invece fornite manualmente\cite{silver2018general}.
