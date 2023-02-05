@@ -5,5 +5,5 @@ Il progetto discusso è interamente consultabile al seguente repository:
 https://github.com/Shadypio/Chess
 
 
-Computer Science Bachelor's Degree Thesis.
+Computer Science Bachelor's Degree Thesis (Italian).
 The referred project is contained in the following repository: https://github.com/Shadypio/Chess
